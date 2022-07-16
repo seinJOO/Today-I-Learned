@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름"></app-header> -->
+        <app-header v-on:pass="logText"></app-header>
+        <!-- methods > passEvent > pass라는 이벤트가 올라왔을 때 logText라는 메서드를 실행
+                => 하위 컴포넌트에서 이벤트를 발생시켜 상위 컴포넌트인 #app의 메서드를 실행시킴 ==> event emit -->
+        <app-content v-on:increase="addNum"></app-content>
+        <!-- add버튼을 눌렀을 때  -->
+        <p>{{ num }}</p>
+        <!--#app의 data의 num 표출-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods: {  // 버튼을 눌렀을 때 실행할 메서드 정의
+                passEvent: function () {
+                    this.$emit('pass'); // 개발자도구 Timeline의 Component Events에서 이벤트 발생 확인 가능
+                }
+            }
+        }
+
+        var appContent = {
+            template: '<button v-on:click="addNumber">add</button>', // v-on:click -> 클릭 시 발생하는 이벤트를 emit으로 넘겨주기 위해 템플릿 정의
+            methods: {
+                addNumber: function () {
+                    this.$emit('increase');
+                }
+            },
+            props: ['propsnum']
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods: {
+                logText: function () {
+                    console.log('hi');
+                },
+                addNum: function () {
+                    this.num += 1;
+                }
+            },
+            data: {
+                num: 10
+            }
+        });
+    </script>
+</body>
+
+</html>
