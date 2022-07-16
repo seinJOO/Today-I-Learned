@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        var div = document.querySelector('#app');
+        var viewModel = {};
+
+        // API화 하기
+        (function () {   // 즉시 실행하는 함수 - init과 render가 노출되지 않게 또다른 유효범위(scope)에 넣어주는 기능
+            function init() {
+                /*
+                Object.defineProperty(대상 객체, 객체의 속성, {     // 특정 변수의 동작 = 객체의 동작을 재정의하는 API
+                    // 정의할 내용
+                });
+                */
+                Object.defineProperty(viewModel, 'str', {
+                    // get : 속성에 접근했을 때의 동작을 정의
+                    get: function () {
+                        console.log('접근');    // = console.log(viewModel.str)
+                    },
+                    // set : 속성에 값을 할당했을때의 동작을 정의
+                    set: function (newValue) {
+                        console.log('할당', newValue);
+                        render(newValue);
+
+                    }
+                });
+                // => Reactivity = vue의 라이브러리에서 데이터의 변화를 감지하여 알아서 화면을 변경해주는 것 = DataBinding
+            }
+
+            function render(value) {     // viewModel에 값이 할당되었을 때 div의 텍스트를 바꿔주는 함수 render()
+                div.innerHTML = value;    // viewModel.str에 값을 새롭게 할당할 때 마다 div#app의 텍스트가 바뀜
+            }
+
+            init();     // init 함수 호출
+        })();
+
+
+    </script>
+</body>
+
+</html>
