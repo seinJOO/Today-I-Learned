@@ -4,7 +4,8 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/databinding">DataBinding</router-link><br>
     <router-link to="/databindingAttr">DataBinding-Attr</router-link> |
-    <router-link to="/databindingList">DataBinding-List</router-link>
+    <router-link to="/databindingFor">DataBinding-For</router-link> |
+    <router-link to="/nestedComponent">NestedComponent</router-link>
   </div>
   <router-view />
 </template>
