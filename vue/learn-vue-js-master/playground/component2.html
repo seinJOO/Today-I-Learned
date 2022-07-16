@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <app-footer></app-footer>
+    </div>
+    <div id="app2">
+        <app-header></app-header> <!-- 전역 컴포넌트는 생성하면 모든 인스턴스에 얼마든지 표출 가능 -->
+        <app-footer></app-footer>
+        <!-- #app2의 app-footer는 화면에 표출되지 않음 - 
+        vue.js:5025 [Vue warn]: Unknown custom element: <app-footer> - did you register the component correctly? For recursive -->
+    </div>
+    components, make sure to provide the "name" option
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 전역컴포넌트는 라이브러리 등 필요한 인스턴스가 있을 때마다 사용할 용도로 생성함
+        Vue.component('app-header', {
+            template: '<h1>Header</h1>'
+        });
+        new Vue({
+            el: '#app',
+            components: {
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                }
+            }
+        });
+        new Vue({ // 지역 컴포넌트는 인스턴스마다 일일히 등록해야 함
+            el: '#app2',
+            /* components: {
+                'app-footer': {
+                    template: '<footer>footer</footer>' // 이렇게 인스턴스마다 등록해줘야 표출됨
+                }
+            }*/
+        });
+    </script>
+</body>
+
+</html>
