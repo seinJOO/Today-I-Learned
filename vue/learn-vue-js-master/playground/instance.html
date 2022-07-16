@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 인스턴스를 붙이면 vue의 기능과 속성들이 유효해짐 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({  // 생성자에 인자는 객체가 들어감, 객체 표기법으로 바로 객체를 정의하기 때문에 주의하기
+
+            el: '#app',     // el (element지정) : id가 app인 태그를 찾아서 인스턴스를 붙이겠다는 의미
+            // el을 사용하지 않으면 vue개발자도구로 인스턴스를 볼 수 없음...???
+            data: {
+                message: 'hi'
+            },
+            methods: {
+
+            },
+            created: function () {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
