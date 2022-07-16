@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <!-- router-link : router에서 페이지 이동을 위한 link 태그 (<a href="__"></a>)-->
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <router-view></router-view> <!-- url에 따라 해당하는 컴포넌트가 표출되는 영역 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script>
+        var LoginComponent = {
+            template: '<div>login</div>'
+        }
+        var MainComponent = {
+            template: '<div>main</div>'
+        }
+
+        var router = new VueRouter({
+            // 페이지의 라우팅 정보
+            routes: [
+                { // 로그인 페이지 정보
+                    path: '/login',  // 페이지의 url 이름
+                    component: LoginComponent   // 해당 url에서 표시될 컴포넌트 (페이지 당 컴포넌트는 하나!!!)
+                },
+                { // 메인 페이지 정보
+                    path: '/main',
+                    component: MainComponent
+                }
+            ]
+        });
+
+        new Vue({
+            el: '#app',     // #app의 인스턴스 정의
+            router: router  // vueRouter를 Vue인스턴스와 연결시킴
+            /* router가 연결이 안 될 경우 아래와 같은 에러 발생 가능
+            TypeError: Cannot read properties of undefined (reading 'matched')"
+            */
+        });
+    </script>
+</body>
+
+</html>
