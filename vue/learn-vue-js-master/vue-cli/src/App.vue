@@ -1,32 +1,21 @@
- <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <!-- 컴포넌트 명명법 종류 -->
-    <!-- <hello-world></hello-world>
-    <HelloWorld></HelloWorld>
-    <HelloWorld/> -->
+<template>
+  <div>
+    <app-header></app-header> <!-- 컴포넌트 사용 -->
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AppHeader from './components/AppHeader.vue'  // 1. 컴포넌트 import
 export default {
-  name: 'App',
+  data: function() {  // .vue파일에서는 data 문법 꼭 지켜야함 ! 안그러면 콘솔에 오류
+    return {
+      str: 'hi'
+    }
+  },
   components: {
-    HelloWorld  // hello-world: HelloWorld => <hello-world></hello-world> 이 컴포넌트 사용법과 똑같음!
+    'app-header': AppHeader // 2. 컴포넌트 등록
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  
 </style>
