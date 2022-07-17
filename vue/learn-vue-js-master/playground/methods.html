@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button v-on:click="메서드 이름">click me</button> -->
+        <button v-on:click="logText">click me</button>
+        <input type="text" v-on:keyup="logText"> <!-- v-on:keyup => 해당 영역에서 키보드가 타이핑 될 때마다 logText 실행  -->
+        <input type="text" v-on:keyup.enter="logText"> <!-- 해당 영역에서 엔터 키를 눌렀을 때 logText 실행 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                logText: function () {
+                    console.log('clicked');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
