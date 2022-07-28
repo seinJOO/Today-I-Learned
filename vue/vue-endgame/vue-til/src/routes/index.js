@@ -7,6 +7,10 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 export default new VueRouter({
+  mode: 'history', // 자동 생성되는 url 중간의 #을 제거하기
+  // 배포했을 때 Server Configuration에서 url에 대한 우회, 필터링에 대한 기능을 넣어줘야 함
+  // (HTML5 History Mode) 설정을 해야만 SPA의 #이 없을때도 서버가 각 url을 인식할 수 있음
+
   // routes에 의해 컨트롤되는 page component들 - views에 있음
   routes: [
     {
