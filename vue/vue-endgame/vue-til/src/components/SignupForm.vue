@@ -28,7 +28,7 @@ import { registerUser } from '@/api/index';
 export default {
   /////////////// 마크업에 필요한 속성들 연결하기 ///////////////
   data() {
-    // 폼태 그의 각 데이터에 연결할 데이터 속성 지정 + 연결
+    // 폼 태그의 각 데이터에 연결할 데이터 속성 지정 + 연결
     // => 마크업의 v-model에 바인딩된 동일한 이름의 값이 변경될 경우 vue에서 감지할 수 있음
     return {
       username: '',
@@ -39,7 +39,12 @@ export default {
   methods: {
     submitForm() {
       console.log('폼 제출');
-      registerUser();
+      const userData = {
+        username: this.username,
+        password: this.password,
+        nickname: this.nickname,
+      };
+      registerUser(userData);
     },
   },
 };
