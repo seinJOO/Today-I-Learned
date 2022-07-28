@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { registerUser } from '@/api/index';
+
 export default {
   /////////////// 마크업에 필요한 속성들 연결하기 ///////////////
   data() {
@@ -37,6 +39,7 @@ export default {
   methods: {
     submitForm() {
       console.log('폼 제출');
+      registerUser();
     },
   },
 };
