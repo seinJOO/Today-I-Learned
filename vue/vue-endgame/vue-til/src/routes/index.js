@@ -21,5 +21,11 @@ export default new VueRouter({
       path: '/signup',
       component: () => import('@/views/SignupPage.vue'),
     },
+    {
+      // 등록되지 않은 페이지에 대해 반응하는 페이지 설정하기
+      path: '*',
+      //다른 path에 해당하는 모든 url에 반응하겠다는 의미
+      component: () => import('@/views/NotFoundPage.vue'),
+    },
   ],
 });
