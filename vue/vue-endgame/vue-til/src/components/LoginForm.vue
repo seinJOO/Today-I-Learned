@@ -51,17 +51,14 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        console.log(data.user.username);
+        const { data } = await loginUser(userData); // return instance.post('login', userData)의 response값을 data 변수에 저장
+        this.$store.commit('setToken', data.token); // 로그인 후 받은 토큰값을 store의 state.token에 저장하기
         this.$store.commit('setUsername', data.user.username);
         this.$router.push('/main');
-        // this.logMessage = `${data.user.username} 님 환영합니다`;
-        // this.initForm();
       } catch (error) {
         // 에러 핸들링할 코드
         console.log(error.response.data);
         this.logMessage = error.response.data;
-        // this.initForm();
       } finally {
         this.initForm();
       }
