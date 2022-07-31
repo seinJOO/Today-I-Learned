@@ -51,10 +51,13 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
-        // js 레벨에서 메인 페이지로 이동 (html : router-link태그)
         console.log(data.user.username);
-        this.$router.push('/main'); // vue상의 url 입력
+
+        // store/index.js의 setUsername mutation을 호출해서 state의 변경을 commit함
+        this.$store.commit('setUsername', data.user.username);
+
         //this.logMessage = `${data.user.username} 님 환영합니다`;
+        this.$router.push('/main');
       } catch (error) {
         console.log(error.response.data);
         this.logMessage = error.response.data;
