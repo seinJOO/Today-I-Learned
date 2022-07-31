@@ -21,7 +21,6 @@ export default new Vuex.Store({
       state.username = '';
     },
     setToken(state, token) {
-      // 토큰값을 받아서 state의 token에 저장
       state.token = token;
     },
   },

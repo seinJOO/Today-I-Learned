@@ -15,7 +15,11 @@
           <label for="password">pw:</label>
           <input id="password" type="text" v-model="password" />
         </div>
-        <button :disabled="!isUsernameValid || !password" type="submit" class="btn">
+        <button
+          :disabled="!isUsernameValid || !password"
+          type="submit"
+          class="btn"
+        >
           로그인
         </button>
       </form>
@@ -51,8 +55,9 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData); // return instance.post('login', userData)의 response값을 data 변수에 저장
-        this.$store.commit('setToken', data.token); // 로그인 후 받은 토큰값을 store의 state.token에 저장하기
+        const { data } = await loginUser(userData);
+        console.log(data.token);
+        this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.username);
         this.$router.push('/main');
       } catch (error) {
