@@ -9,7 +9,7 @@ function registerUser(userData) {
 }
 
 function loginUser(userData) {
-  return instance.post('login', userData); // 로그인 api 구현
+  return instance.post('login', userData);
 }
 
-export { registerUser, loginUser }; // 꼭 export 해줘야함
+export { registerUser, loginUser };
