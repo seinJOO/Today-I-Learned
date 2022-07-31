@@ -1,19 +1,25 @@
 import axios from 'axios';
-import store from '../store';
+import { setInterceptors } from './common/interceptors';
 
-const instance = axios.create({
-  // get, post 등 axios의 instance를 실행하게 될 때 아래 정의된 속성들을 따르게 됨
-  baseURL: process.env.VUE_APP_API_URL,
-  headers: {
-    // 헤더의 기본 요소들 정의 가능
-    Authorization: store.state.token, // store.state에 저장된 token을 헤더에 넣기
-  },
-});
+// axios 초기화 함수 - instance 생성을 모듈화 (for 간결한 코드)
+function createInstance() {
+  const instance = axios.create({
+    // get, post 등 axios의 instance를 실행하게 될 때 아래 정의된 속성들을 따르게 됨
+    baseURL: process.env.VUE_APP_API_URL,
+  });
 
+  // 앞에서 instance(=axios.create)에 대해 공통설정을 한 뒤 인터셉터에 넘겨줌
+  return setInterceptors(instance);
+}
+
+const instance = createInstance(); // 공통설정 및 인터셉터 설정 완료한 instance를 생성
+
+// 회원가입 API
 function registerUser(userData) {
   return instance.post('signup', userData);
 }
 
+// 로그인 API
 function loginUser(userData) {
   return instance.post('login', userData);
 }
