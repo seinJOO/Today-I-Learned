@@ -15,11 +15,7 @@
           <label for="password">pw:</label>
           <input id="password" type="text" v-model="password" />
         </div>
-        <button
-          :disabled="!isUsernameValid || !password"
-          type="submit"
-          class="btn"
-        >
+        <button :disabled="!isUsernameValid || !password" type="submit" class="btn">
           로그인
         </button>
       </form>
@@ -31,6 +27,7 @@
 <script>
 import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
+import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 
 export default {
   data() {
@@ -56,9 +53,12 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
-        console.log(data.token);
         this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.username);
+        console.log(data.user.username);
+        // 쿠키에 유저정보 저장하기
+        saveAuthToCookie(data.token); // 쿠키에 til_auth=토큰값 저장
+        saveUserToCookie(data.user.username); // 쿠키에 til_user=유저명 저장
         this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링할 코드
