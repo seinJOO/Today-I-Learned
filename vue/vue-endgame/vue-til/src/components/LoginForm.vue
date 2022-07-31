@@ -25,9 +25,7 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
-import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 
 export default {
   data() {
@@ -52,13 +50,18 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        this.$store.commit('setToken', data.token);
-        this.$store.commit('setUsername', data.user.username);
-        console.log(data.user.username);
-        // 쿠키에 유저정보 저장하기
-        saveAuthToCookie(data.token); // 쿠키에 til_auth=토큰값 저장
-        saveUserToCookie(data.user.username); // 쿠키에 til_user=유저명 저장
+        // dispatch : actions를 호출하는 함수
+        await this.$store.dispatch('LOGIN', userData);
+        // await를 하지 않으면 토큰을 받아서 store에 저장하기 전에 main에 진입되기 때문에 순서처리 오류로 인해 에러남.
+        // return data기 때문에 const data = 에 넣어줘도 됨 (사용하려면)
+
+        /* const { data } = await loginUser(userData);
+           this.$store.commit('setToken', data.token);
+           this.$store.commit('setUsername', data.user.username);
+           console.log(data.user.username);
+           saveAuthToCookie(data.token); /
+           saveUserToCookie(data.user.username); */
+
         this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링할 코드
