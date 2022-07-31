@@ -24,4 +24,9 @@ function loginUser(userData) {
   return instance.post('login', userData);
 }
 
-export { registerUser, loginUser };
+// 학습 노트 데이터를 조회하는 API
+function fetchPosts() {
+  return instance.get('posts'); // swagger UI의 조회API url
+}
+
+export { registerUser, loginUser, fetchPosts };

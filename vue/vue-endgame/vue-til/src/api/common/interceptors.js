@@ -5,7 +5,7 @@ export function setInterceptors(instance) {
   instance.interceptors.request.use(
     function(config) {
       // Do something before request is sent : request 전송 전에 처리할 코드
-      console.log(config); // config객체 확인 - 어떻게 headers/Authorization를 실을 지 확인하기
+      // console.log(config); // config객체 확인 - 어떻게 headers/Authorization를 실을 지 확인하기
       config.headers.Authorization = store.state.token; // config의 headers에 토큰값 저장
       return config;
     },
