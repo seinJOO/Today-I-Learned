@@ -18,5 +18,9 @@ export default new Vuex.Store({
     setUsername(state, username) {
       state.username = username;
     },
+    //로그아웃 기능 구현 - username=''일 때 isLogin=false기 때문에 username을 비워주기만 하기
+    clearUsername(state) {
+      state.username = '';
+    },
   },
 });

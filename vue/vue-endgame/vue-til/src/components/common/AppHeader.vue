@@ -12,6 +12,8 @@
       <template v-if="isUserLogin">
         <!-- 2) computed를 통해 가져와서 코드를 더 간결하게 만들기 -->
         <span class="username">{{ $store.state.username }}</span>
+        <a href="javascript:;" @click="logoutUser">Logout</a>
+        <!-- href="javascript:;" >> 앵커태그의 본래 기능을 막음 -->
       </template>
       <!-- 분기처리 2 : 로그인이 되지 않았을 때 표출 -->
       <template v-else>
@@ -27,6 +29,12 @@ export default {
   computed: {
     isUserLogin() {
       return this.$store.getters.isLogin; // this.를 통해 getters에 접근
+    },
+  },
+  methods: {
+    logoutUser() {
+      this.$store.commit('clearUsername'); // 인자값이 필요없는 함수임
+      this.$router.push('/login');
     },
   },
 };
