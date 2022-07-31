@@ -15,7 +15,9 @@
         <label for="nickname"> NAME: </label>
         <input id="nickname" type="text" v-model="nickname" />
       </div>
-      <button type="submit">회원 가입</button>
+      <button :disabled="!isUsernameValid || !password || !nickname" type="submit">
+        회원 가입
+      </button>
       <!-- 버튼을 누르면 submit 이벤트가 이벤트 버블링에 의해 form으로 올라오게 되면서
             form에서는 v-on:submit을 통해 디렉티브 이벤트를 받아 submitForm을 실행함 -->
       <p>{{ logMessage }}</p>
@@ -25,6 +27,7 @@
 
 <script>
 import { registerUser } from '@/api/index';
+import { validateEmail } from '@/utils/validation';
 
 export default {
   /////////////// 마크업에 필요한 속성들 연결하기 ///////////////
@@ -39,6 +42,11 @@ export default {
       // log
       logMessage: '',
     };
+  },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
+    },
   },
   methods: {
     // async-await으로 비동기 처리 지정해주기
