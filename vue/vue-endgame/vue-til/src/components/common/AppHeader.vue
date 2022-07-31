@@ -3,19 +3,17 @@
     <div>
       <router-link to="/" class="logo">
         TIL
+        <span v-if="isUserLogin">by {{ $store.state.username }}</span>
       </router-link>
     </div>
     <div class="navigations">
-      <!-- 분기처리 1 : 로그인이 되었을 때 표출 -->
-      <!-- <template v-if="$store.getters.isLogin">  
-            1) store의 getters에서 직접 가져오기-->
+      <!-- 1 -->
       <template v-if="isUserLogin">
-        <!-- 2) computed를 통해 가져와서 코드를 더 간결하게 만들기 -->
-        <span class="username">{{ $store.state.username }}</span>
-        <a href="javascript:;" @click="logoutUser">Logout</a>
-        <!-- href="javascript:;" >> 앵커태그의 본래 기능을 막음 -->
+        <a href="javascript:;" @click="logoutUser" class="logout-button">
+          Logout
+        </a>
       </template>
-      <!-- 분기처리 2 : 로그인이 되지 않았을 때 표출 -->
+      <!-- 2 -->
       <template v-else>
         <router-link to="/login">로그인</router-link>
         <router-link to="/signup">회원가입</router-link>
@@ -28,12 +26,12 @@
 export default {
   computed: {
     isUserLogin() {
-      return this.$store.getters.isLogin; // this.를 통해 getters에 접근
+      return this.$store.getters.isLogin;
     },
   },
   methods: {
     logoutUser() {
-      this.$store.commit('clearUsername'); // 인자값이 필요없는 함수임
+      this.$store.commit('clearUsername');
       this.$router.push('/login');
     },
   },
@@ -73,6 +71,9 @@ a.logo {
   position: fixed;
   top: 0;
   width: 100%;
+}
+.logout-button {
+  font-size: 14px;
 }
 a.router-link-exact-active {
   color: white;
