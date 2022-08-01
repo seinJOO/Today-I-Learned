@@ -10,6 +10,10 @@
         <div>
           <label for="contents">Contents : </label>
           <textarea id="contents" type="text" rows="5" v-model="contents" />
+          <p class="validation-text warning" v-if="!isContentsValid">
+            Contents length must be less then 200
+          </p>
+          <p class="validation-text warning">{{ isContentsValid2 }}</p>
         </div>
         <button type="submit" class="btn">Create</button>
       </form>
@@ -27,6 +31,14 @@ export default {
       contents: '',
       logMessage: '',
     };
+  },
+  computed: {
+    isContentsValid() {
+      return this.contents.length <= 200;
+    },
+    isContentsValid2() {
+      return this.contents.length <= 200 ? `` : `200자 제한을 초과하였습니다`;
+    },
   },
   methods: {
     async submitForm() {
