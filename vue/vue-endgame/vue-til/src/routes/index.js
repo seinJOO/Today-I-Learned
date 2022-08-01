@@ -14,7 +14,7 @@ export default new VueRouter({
     },
     {
       path: '/login',
-      component: () => import('@/views/LoginPage.vue'),
+      component: () => import('@/views/LoginPage.vue'), // lazy loading
     },
     {
       path: '/signup',
