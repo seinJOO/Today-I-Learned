@@ -1,33 +1,27 @@
 import axios from 'axios';
 import { setInterceptors } from './common/interceptors';
 
-// 액시오스 초기화 함수
+// Authorization 필요 여부에 따라 API 분리
+// api/index.js 에서는 setup과 관련된 코드만 남게 됨
+
+// 단순히 BASE URL만 생성해주는 기본 instance
 function createInstance() {
-  const instance = axios.create({
+  return axios.create({
     baseURL: process.env.VUE_APP_API_URL,
+  });
+}
+
+// 액시오스 초기화 함수 - url을 받아 baseURL에 넣어 생성하는 instance
+function createInstanceWithAuth(url) {
+  const instance = axios.create({
+    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
   });
   return setInterceptors(instance);
 }
-const instance = createInstance();
+export const instance = createInstance();
+export const posts = createInstanceWithAuth('posts');
 
-// 회원가입 API
-function registerUser(userData) {
-  return instance.post('signup', userData);
-}
-
-// 로그인 API
-function loginUser(userData) {
-  return instance.post('login', userData);
-}
-
-// 학습 노트 데이터를 조회하는 API
-function fetchPosts() {
-  return instance.get('posts');
-}
-
-// 학습노트 데이터를 생성하는 API
-function createPost(postData) {
-  return instance.post('posts', postData);
-}
-
-export { registerUser, loginUser, fetchPosts, createPost };
+// GET - /posts
+// POST - /posts
+// PUT - /posts/{_id}     => 앞의 url이 반복되는 것을 방지하기 위해
+// DELETE - /posts/{_id}      crateInstanceWithAuth를 이용 **swagger UI 참고
