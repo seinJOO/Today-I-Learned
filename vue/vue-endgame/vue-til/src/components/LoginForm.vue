@@ -15,7 +15,11 @@
           <label for="password">pw:</label>
           <input id="password" type="text" v-model="password" />
         </div>
-        <button :disabled="!isUsernameValid || !password" type="submit" class="btn">
+        <button
+          :disabled="!isUsernameValid || !password"
+          type="submit"
+          class="btn"
+        >
           로그인
         </button>
       </form>
@@ -50,18 +54,7 @@ export default {
           username: this.username,
           password: this.password,
         };
-        // dispatch : actions를 호출하는 함수
         await this.$store.dispatch('LOGIN', userData);
-        // await를 하지 않으면 토큰을 받아서 store에 저장하기 전에 main에 진입되기 때문에 순서처리 오류로 인해 에러남.
-        // return data기 때문에 const data = 에 넣어줘도 됨 (사용하려면)
-
-        /* const { data } = await loginUser(userData);
-           this.$store.commit('setToken', data.token);
-           this.$store.commit('setUsername', data.user.username);
-           console.log(data.user.username);
-           saveAuthToCookie(data.token); /
-           saveUserToCookie(data.user.username); */
-
         this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링할 코드

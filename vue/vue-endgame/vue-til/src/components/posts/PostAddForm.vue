@@ -4,26 +4,31 @@
     <div class="form-wrapper">
       <form class="form" @submit.prevent="submitForm">
         <div>
-          <label for="title">Title : </label>
+          <label for="title">Title:</label>
           <input id="title" type="text" v-model="title" />
         </div>
         <div>
-          <label for="contents">Contents : </label>
+          <label for="contents">Contents:</label>
           <textarea id="contents" type="text" rows="5" v-model="contents" />
-          <p class="validation-text warning" v-if="!isContentsValid">
-            Contents length must be less then 200
+          <p
+            v-if="!isContentsValid"
+            class="validation-text warning isContentTooLong"
+          >
+            Contents length must be less than 250
           </p>
-          <p class="validation-text warning">{{ isContentsValid2 }}</p>
         </div>
         <button type="submit" class="btn">Create</button>
       </form>
-      <p class="log">{{ logMessage }}</p>
+      <p class="log">
+        {{ logMessage }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 import { createPost } from '@/api/index';
+
 export default {
   data() {
     return {
@@ -36,21 +41,17 @@ export default {
     isContentsValid() {
       return this.contents.length <= 200;
     },
-    isContentsValid2() {
-      return this.contents.length <= 200 ? `` : `200자 제한을 초과하였습니다`;
-    },
   },
   methods: {
     async submitForm() {
       try {
         const response = await createPost({
-          // const postData = ~ 대신 함수에 직접 postData 정의
           title: this.title,
           contents: this.contents,
         });
         console.log(response);
       } catch (error) {
-        // console.log(error); // 콘솔에 출력된 error를 보고 message의 위치 알아내기
+        console.log(error.response.data.message);
         this.logMessage = error.response.data.message;
       }
     },
