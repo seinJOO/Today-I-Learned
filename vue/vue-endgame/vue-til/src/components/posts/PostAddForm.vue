@@ -13,6 +13,7 @@
         </div>
         <button type="submit" class="btn">Create</button>
       </form>
+      <p class="log">{{ logMessage }}</p>
     </div>
   </div>
 </template>
@@ -24,17 +25,22 @@ export default {
     return {
       title: '',
       contents: '',
+      logMessage: '',
     };
   },
   methods: {
     async submitForm() {
-      const response = await createPost({
-        // const postData = ~ 대신 함수에 직접 postData 정의
-        title: this.title,
-        contents: this.contents,
-      });
-      console.log(response);
-      // console.log('submit');     // submit버튼이 잘 동작하는지 확인
+      try {
+        const response = await createPost({
+          // const postData = ~ 대신 함수에 직접 postData 정의
+          title: this.title,
+          contents: this.contents,
+        });
+        console.log(response);
+      } catch (error) {
+        // console.log(error); // 콘솔에 출력된 error를 보고 message의 위치 알아내기
+        this.logMessage = error.response.data.message;
+      }
     },
   },
 };
