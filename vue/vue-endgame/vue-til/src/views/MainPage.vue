@@ -8,7 +8,9 @@
           v-for="postItem in postItems"
           :key="postItem._id"
           :postItem="postItem"
+          @refresh="fetchData"
         ></PostListItem>
+        <!-- @refresh === PostListItem.vue의 this.$emit('refresh') -->
       </ul>
     </div>
     <router-link to="/add" class="create-button">
