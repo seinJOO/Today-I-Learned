@@ -30,10 +30,10 @@ export default {
         await deletePost(this.postItem._id);
         this.$emit('refresh');
       }
-      // console.log('deleted');
     },
     routeEditPage() {
-      this.$router.push('/post/a@a.com');
+      const id = this.postItem._id;
+      this.$router.push(`/post/${id}`);
     },
   },
 };
