@@ -46,7 +46,7 @@ export default {
           title: this.title,
           contents: this.contents,
         });
-        this.$router.push('/main'); // 노트 생성 후 메인으로 push
+        this.$router.push('/main');
         console.log(response);
       } catch (error) {
         console.log(error.response.data.message);
