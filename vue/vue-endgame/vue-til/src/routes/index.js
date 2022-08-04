@@ -29,8 +29,6 @@ export default new VueRouter({
       component: () => import('@/views/PostAddPage.vue'),
     },
     {
-      // Dynamic Route Matching
-      // /post/ 뒤의 값을 파라미터 id로 받음
       path: '/post/:id',
       component: () => import('@/views/PostEditPage.vue'),
     },

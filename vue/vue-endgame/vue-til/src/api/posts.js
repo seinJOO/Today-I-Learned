@@ -21,9 +21,9 @@ function deletePost(postId) {
   return posts.delete(postId);
 }
 
-// 특정 학습 노트를 수정하는 API - swaggerUI에서 PUT /posts/{_id} API 확인
+// 학습 노트 데이터를 수정하는 API
 function editPost(postId, postData) {
-  return posts.put(postId, postData); // post(url, data)
+  return posts.put(postId, postData);
 }
 
-export { fetchPosts, createPost, deletePost, fetchPost, editPost };
+export { fetchPosts, fetchPost, createPost, deletePost, editPost };

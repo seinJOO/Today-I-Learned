@@ -10,7 +10,10 @@
         <div>
           <label for="contents">Contents:</label>
           <textarea id="contents" type="text" rows="5" v-model="contents" />
-          <p v-if="!isContentsValid" class="validation-text warning isContentTooLong">
+          <p
+            v-if="!isContentsValid"
+            class="validation-text warning isContentTooLong"
+          >
             Contents length must be less than 250
           </p>
         </div>
