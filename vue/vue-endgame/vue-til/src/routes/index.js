@@ -5,8 +5,9 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
-  mode: 'history',
+// router 변수에 담아주기
+const router = new VueRouter({
+  mode: 'history', // 해시값(#) 관련 설정
   routes: [
     {
       path: '/',
@@ -38,3 +39,11 @@ export default new VueRouter({
     },
   ],
 });
+
+// 콜백 인자 - to : 이동하려는 페이지 / from : 현재 페이지 / next : 페이지 이동 API 호출
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  next(); // next()를 호출해야만 다음 페이지로 이동할 수 있음 ***
+});
+
+export default router;
