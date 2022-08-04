@@ -1,7 +1,8 @@
 <template>
   <header>
     <div>
-      <router-link to="/" class="logo">
+      <router-link :to="logoLink" class="logo">
+        <!-- to="/" 대신 computed 값을 넣음 -->
         TIL
         <span v-if="isUserLogin">by {{ $store.state.username }}</span>
       </router-link>
@@ -27,6 +28,10 @@ export default {
   computed: {
     isUserLogin() {
       return this.$store.getters.isLogin;
+    },
+    logoLink() {
+      // 로고 클릭 시 로그인 상태면 메인페이지로, 아니면 로그인 페이지로
+      return this.$store.getters.isLogin ? '/main' : '/login';
     },
   },
   methods: {
