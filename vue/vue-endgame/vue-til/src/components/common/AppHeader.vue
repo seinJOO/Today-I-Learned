@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies';
 export default {
   computed: {
     isUserLogin() {
@@ -36,7 +37,14 @@ export default {
   },
   methods: {
     logoutUser() {
+      // store/index.js에서 토큰 값 삭제하는 mutation 호출하기
+      // mutation은 state 값을 변경시키는 속성이기 때문에 commit을 통해 호출한다
       this.$store.commit('clearUsername');
+      this.$store.commit('clearToken');
+
+      // utils/cookies.js 파일에 보면 쿠키는 til_auth와 til_user값을 가지고 있음 - 각각 삭제
+      deleteCookie('til_auth');
+      deleteCookie('til_user');
       this.$router.push('/login');
     },
   },
