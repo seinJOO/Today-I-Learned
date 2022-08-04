@@ -15,7 +15,14 @@
           <label for="password">pw:</label>
           <input id="password" type="text" v-model="password" />
         </div>
-        <button :disabled="!isUsernameValid || !password" type="submit" class="btn">
+        <button
+          :disabled="!isUsernameValid || !password"
+          type="submit"
+          class="btn"
+          :class="!isUsernameValid || !password ? 'disabled' : null"
+        >
+          <!-- 테스트 코드를 위해 v-bind:class 로 버튼의 class에서도 활성화 여부 정의
+          (v-bind:class의 삼항연산자 결과에 따라 class=에 결과값이 추가됨) -->
           로그인
         </button>
       </form>
