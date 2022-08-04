@@ -2,22 +2,19 @@ import { shallowMount } from '@vue/test-utils';
 
 import LoginForm from './LoginForm.vue';
 
-// 실제 브라우저에서 확인하지 않아도 원하는 값이나 기능들이 동작하는지 확인하기
-
 describe('LoginForm.vue', () => {
-  test('ID는 이메일 형식이어야 한다', () => {
-    // shallowMount(component, options) 의 options : 컴포넌트를 마운팅 할 때의 option
+  test('ID는 이메일 형식이 아니면 경고 메세지가 출력된다', () => {
     const wrapper = shallowMount(LoginForm, {
-      // 실제로 컴포넌트를 마운팅 할 때 처럼 속성 설정 가능
       data() {
         return {
-          username: 'test', // 테스트코드 내에서 로그인폼에 정의된 v-model의 username 값을 바꾸게 됨
+          username: 'test',
         };
       },
     });
-    const idInput = wrapper.find('#username'); // 로그인폼의 id="username" 값 추적
-    console.log('인풋 박스의 값', idInput.element.value); // test
-    // LoginForm의 이메일 유효성을 검증하는 computed 메서드를 끌어와 조건에 만족하는지 확인
-    console.log(wrapper.vm.isUsernameValid); // false
+    // 이메일 유효성을 만족하지 않았을 때 나타나는 p태그가 존재하는지 확인
+    // p태그에 적용되는 클래스 warning을 사용
+    const warningText = wrapper.find('.warning');
+    console.log(warningText.html());
+    expect(warningText.exists()).toBeTruthy();
   });
 });
