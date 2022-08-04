@@ -3,6 +3,7 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    jest: true // 테스트 코드를 위한 세팅
   },
   extends: ["plugin:vue/essential", "@vue/prettier"],
   rules: {

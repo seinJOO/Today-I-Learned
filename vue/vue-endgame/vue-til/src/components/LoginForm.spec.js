@@ -18,6 +18,6 @@ describe('math.js', () => {
     const result = sum(10, 20);
     // expect(결과값).toBe(추정값); : 결과값이 추정값이라고 예상한다~ 를 설정
     // result === 30; 과 같은 의미
-    expect(result).toBe(30);
+    expect(result).not.toBe(20); // not으로도 판별 가능
   });
 });
