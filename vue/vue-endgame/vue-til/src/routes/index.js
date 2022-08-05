@@ -11,7 +11,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/lodash',
     },
     {
       path: '/login',
@@ -35,6 +35,10 @@ const router = new VueRouter({
       path: '/post/:id',
       component: () => import('@/views/PostEditPage.vue'),
       meta: { auth: true },
+    },
+    {
+      path: '/lodash',
+      component: () => import('@/views/LodashPage.vue'),
     },
     {
       path: '*',
