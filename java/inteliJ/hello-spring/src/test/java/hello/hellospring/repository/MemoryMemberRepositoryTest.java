@@ -29,10 +29,14 @@ class MemoryMemberRepositoryTest {  // 다른 곳에서 끌어와서 사용할�
 
     @Test
     public void save() {
+        //given
         Member member = new Member();
         member.setName("senny");
 
+        //when
         repository.save(member);
+
+        //then
         // Optional에서 값을 꺼내는 방법은 .get() - 직접 꺼내는 건 좋은 방법은 아님
         Member result = repository.findById(member.getId()).get();
         Assertions.assertEquals(member, result); // assertEquals(expected, actual)
@@ -41,6 +45,8 @@ class MemoryMemberRepositoryTest {  // 다른 곳에서 끌어와서 사용할�
 
     @Test
     public void findByName() {
+
+        // given
         // senny1 회원가입
         Member member1 = new Member();
         member1.setName("senny1");
@@ -50,12 +56,16 @@ class MemoryMemberRepositoryTest {  // 다른 곳에서 끌어와서 사용할�
         member2.setName("senny2");
         repository.save(member2);
 
+        // when
         Member result = repository.findByName("senny1").get();
+
+        // then
         assertThat(result).isEqualTo(member1);
     }
 
     @Test
     public void findAll() {
+        // given
         Member member1 = new Member();
         member1.setName("senny1");
         repository.save(member1);
@@ -64,7 +74,10 @@ class MemoryMemberRepositoryTest {  // 다른 곳에서 끌어와서 사용할�
         member2.setName("senny2");
         repository.save(member2);
 
+        // when
         List<Member> result = repository.findAll();
+
+        // then
         // 가입된 회원 수가 예상과 맞는지 확인
         assertThat(result.size()).isEqualTo(2);
     }
