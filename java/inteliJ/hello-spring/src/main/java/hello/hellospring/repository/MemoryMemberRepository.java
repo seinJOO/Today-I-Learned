@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+// @Repository // 직접 자바 코드로 의존성 주입해보기
 public class MemoryMemberRepository implements MemberRepository{
 
     // 실무에서는 동시성 문제로 인해 ConcurrentHashMap을 사용함

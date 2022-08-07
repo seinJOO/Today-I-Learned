@@ -12,7 +12,7 @@ import java.util.Optional;
 /* @Service 등록 시 스프링이 서비스 객체를 빈에 저장하기 위해 스캔
 *  => @Autowired로 MemberRepository를 연결하면
 * 스프링에서 자동으로 필요성을 인식하여 서비스에 주입함 */
-@Service
+// @Service // 직접 자바 코드로 의존성 주입해보기
 public class MemberService {
 
     /**
@@ -22,7 +22,7 @@ public class MemberService {
      */
     private final MemberRepository memberRepository;
 
-    @Autowired
+    //@Autowired // 직접 자바 코드로 의존성 주입해보기
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
