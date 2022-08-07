@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>이름</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="member : ${members}"> <!-- 모델 안에 있는 데이터를 꺼내오는 법 ${..} -->
+        <td th:text="${member.id}"></td> <!--private static long sequence = 0L;-->
+        <td th:text="${member.name}"></td> <!-- .name = getName() (눌러보면 getter로 이동됨) -->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
