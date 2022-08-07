@@ -11,8 +11,14 @@ public class MemberService {
 
     /**
      * 회원 정보 레포지토리 import
+     * 레퍼지토리를 서비스에서 직접 new로 생성하는게 아니라, 외부에서 객체를 주입해줄 수 있도록 바꿔줌
+     * 테스트 등의 환경에서도 동일한 레퍼지토리를 사용할 수 있게 됨
      */
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원 가입
