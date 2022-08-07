@@ -3,10 +3,16 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+/* @Service 등록 시 스프링이 서비스 객체를 빈에 저장하기 위해 스캔
+*  => @Autowired로 MemberRepository를 연결하면
+* 스프링에서 자동으로 필요성을 인식하여 서비스에 주입함 */
+@Service
 public class MemberService {
 
     /**
@@ -16,6 +22,7 @@ public class MemberService {
      */
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
