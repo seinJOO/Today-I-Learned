@@ -1,3 +1,6 @@
+-- h2 설치 후 멤버 목록 테이블 생성 (C:\Users\sein1\STUDY\java\Boot - 입문\h2\bin>h2.bat)
+-- genarated by default as identity : 값이 없을 경우 자동으로 값 채우기 (auto increment = Repository의 sequence)
+
 drop table if exists member CASCADE;
 create table member
 (
