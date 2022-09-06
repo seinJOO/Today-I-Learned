@@ -1,10 +1,13 @@
 package hello.hellospring;
 
+import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  * 자바 코드로 직접 스프링 빈 등록하기
@@ -23,6 +26,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
+    // SpringBoot가 프로퍼티파일을 기반으로 dataSource를 만들고 관리할 수 있게 설정
+    private DataSource dataSource; 
+
+    @Autowired
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Bean
     public MemberService memberService() {
         // 스프링에 빈으로 생성된 MemberRepository를 MemberService에 주입함
@@ -32,7 +43,10 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
         // MemberRepository는 인터페이스이기 때문에 객체 생성 X
-        return new MemoryMemberRepository();
+        //return new MemoryMemberRepository();
+
+        // JDBC 객체를 빈으로 등록하기
+        return new JdbcMemberRepository(dataSource);
     }
 
     /**
