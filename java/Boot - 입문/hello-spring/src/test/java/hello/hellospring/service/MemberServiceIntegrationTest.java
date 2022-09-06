@@ -2,6 +2,7 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.JdbcMemberRepository;
+import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,8 @@ public class MemberServiceIntegrationTest {
     // => DB와 실제로 연결된 테스트를 실행할 때 DB에 데이터가 남지 않으므로 다음 테스트에 영향 X
     // 이외에도 각 테스트에 @Commit 등의 어노테이션으로 커밋도 가능하다!
     @Autowired MemberService memberService;
-    @Autowired JdbcMemberRepository memberRepository;
+    @Autowired
+    JdbcTemplateMemberRepository memberRepository;
 
     @Test
     void 회원가입() {
