@@ -1,11 +1,11 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
+import hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +23,7 @@ public class MemberServiceIntegrationTest {
     // 이외에도 각 테스트에 @Commit 등의 어노테이션으로 커밋도 가능하다!
     @Autowired MemberService memberService;
     @Autowired
-    JdbcTemplateMemberRepository memberRepository;
+    MemberRepository memberRepository;
 
     @Test
     void 회원가입() {

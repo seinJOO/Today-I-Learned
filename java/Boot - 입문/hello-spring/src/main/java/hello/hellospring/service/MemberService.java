@@ -5,6 +5,7 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.Optional;
 *  => @Autowired로 MemberRepository를 연결하면
 * 스프링에서 자동으로 필요성을 인식하여 서비스에 주입함 */
 // @Service // 직접 자바 코드로 의존성 주입해보기
+@Transactional // JPA를 쓸 때는 서비스에 Transactional 처리해줘야 함 (DB 이상현상 방지)
 public class MemberService {
 
     /**

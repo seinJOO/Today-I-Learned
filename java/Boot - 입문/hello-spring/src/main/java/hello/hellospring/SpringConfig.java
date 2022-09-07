@@ -2,12 +2,14 @@ package hello.hellospring;
 
 import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.JdbcTemplateMemberRepository;
+import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 /**
@@ -27,12 +29,18 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    // SpringBoot가 프로퍼티파일을 기반으로 dataSource를 만들고 관리할 수 있게 설정
-    private DataSource dataSource; 
+// SpringBoot가 프로퍼티파일을 기반으로 dataSource를 만들고 관리할 수 있게 설정
+//    private DataSource dataSource; //
+//    @Autowired
+//    public SpringConfig(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
+
+    private EntityManager em;
 
     @Autowired
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     @Bean
@@ -45,9 +53,8 @@ public class SpringConfig {
     public MemberRepository memberRepository() {
         // MemberRepository는 인터페이스이기 때문에 객체 생성 X
         //return new MemoryMemberRepository();
-
-        // JDBC 객체를 빈으로 등록하기
-        return new JdbcTemplateMemberRepository(dataSource);
+        //return new JdbcTemplateMemberRepository(dataSource);  // JDBC 객체를 빈으로 등록하기
+        return new JpaMemberRepository(em);
     }
 
     /**
