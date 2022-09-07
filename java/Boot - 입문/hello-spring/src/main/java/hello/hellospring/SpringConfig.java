@@ -1,23 +1,17 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
-import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
-
 /**
  * 자바 코드로 직접 스프링 빈 등록하기
  * 컨트롤러는 ComponentScan이기 때문에 따로 빈 객체 설정을 할 수는 없음
  * => Autowired를 스캔하면서 컨트롤러를 빈에 주입
- * 
- * ** 컴포넌트 스캔을 사용할 경우 
+ *
+ * ** 컴포넌트 스캔을 사용할 경우
  *    정형화되지 않거나, 상황에 따라 구현클래스를 변경해야 하면 설정을 통해 스프링 빈으로 등록
  *    => 아직 DB가 정해지지 않은 상황에서 스프링 빈으로 등록하여 작업할 경우
  *       추후 DB에 대한 설정만 해주면 비즈니스 로직 코드 변경 없이 수월하게 바꿔치기 가능
@@ -36,26 +30,32 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
-    private EntityManager em;
+//    private EntityManager em;
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService() {
         // 스프링에 빈으로 생성된 MemberRepository를 MemberService에 주입함
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
+    //@Bean
+    //public MemberRepository memberRepository() {
         // MemberRepository는 인터페이스이기 때문에 객체 생성 X
         //return new MemoryMemberRepository();
         //return new JdbcTemplateMemberRepository(dataSource);  // JDBC 객체를 빈으로 등록하기
-        return new JpaMemberRepository(em);
-    }
+        //return new JpaMemberRepository(em);
+    //}
 
     /**
      * DI(의존성 주입)의 세 가지 방법 (* 스프링 빈에 등록된 클래스 내에서 선언된 경우에만 @Autowired가 동작함)
