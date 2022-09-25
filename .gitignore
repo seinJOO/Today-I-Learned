@@ -2,3 +2,4 @@ target/*
 META-INF/*
 .springBeans
 h2/
+vbnet/
